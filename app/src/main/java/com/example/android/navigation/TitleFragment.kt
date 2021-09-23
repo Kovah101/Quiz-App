@@ -1,12 +1,13 @@
 package com.example.android.navigation
 
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.FragmentTitleBinding
 
 
@@ -22,16 +23,38 @@ class TitleFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(inflater, R.layout.fragment_title, container, false)
+        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(
+            inflater,
+            R.layout.fragment_title,
+            container,
+            false
+        )
         // complete onClickListener with Navigation
         binding.playButton.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
+            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
         )
+        // overflow option menu only available on titleFragment - if in mainActivity it would be everywhere
+        setHasOptionsMenu(true)
+        // set action bar title
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.app_name)
 
         return binding.root
     }
 
+
+    // overflow menu needs to be inflated
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController())
+                || super.onOptionsItemSelected(item)
+    }
 }
