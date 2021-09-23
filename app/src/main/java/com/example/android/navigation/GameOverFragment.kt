@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameOverBinding
 
 class GameOverFragment : Fragment() {
@@ -33,9 +34,9 @@ class GameOverFragment : Fragment() {
         val binding: FragmentGameOverBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_over, container, false)
         // onClick to take you back to the start
-        binding.tryAgainButton.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.action_gameOverFragment2_to_gameFragment)
-        )
+        binding.tryAgainButton.setOnClickListener{ view: View ->
+            view.findNavController().navigate(GameOverFragmentDirections.actionGameOverFragment2ToGameFragment())
+        }
         // set action bar title
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.app_name)
 
