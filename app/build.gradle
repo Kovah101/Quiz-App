@@ -29,7 +29,7 @@ android {
     }
     defaultConfig {
         applicationId 'com.example.android.navigation'
-        minSdkVersion 26
+        minSdkVersion 19
         targetSdkVersion 30
         vectorDrawables.useSupportLibrary = true
         versionCode 1
@@ -42,6 +42,11 @@ android {
         }
     }
     productFlavors {
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -60,8 +65,8 @@ dependencies {
     // Material Design
     implementation "com.google.android.material:material:$version_material"
 
-    // Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
-    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$version_navigation")
+    implementation("androidx.navigation:navigation-ui-ktx:$version_navigation")
+
 }
