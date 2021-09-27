@@ -25,8 +25,8 @@ class TitleFragment : Fragment() {
             false
         )
         // complete onClickListener with Navigation
-        binding.playButton.setOnClickListener {
-            it.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+        binding.playButton.setOnClickListener { v: View ->
+            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
         }
         // overflow option menu only available on titleFragment - if in mainActivity it would be everywhere
         setHasOptionsMenu(true)
